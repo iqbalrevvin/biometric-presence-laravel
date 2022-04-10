@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Karyawan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Validator;
 
 class LoginController extends Controller
 {
