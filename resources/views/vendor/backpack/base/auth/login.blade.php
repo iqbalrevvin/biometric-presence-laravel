@@ -1,7 +1,8 @@
 @extends(backpack_view('layouts.plain'))
 
 @section('content')
-<section class="banner-area relative about-banner"  style="background: url({{ asset('images/bg-web.jpg') }});">	
+<section class="banner-area relative about-banner">	
+{{-- <section class="banner-area relative about-banner" style="background: url({{ asset('images/bg-web.jpg') }});">	 --}}
     <div class="row justify-content-center" >
         <div class="col-12 col-md-8 col-lg-4">
             <h3 class="text-center mb-4">BioPresence Admin Panel</h3>
