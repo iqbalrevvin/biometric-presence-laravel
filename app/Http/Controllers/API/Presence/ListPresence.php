@@ -17,16 +17,26 @@ class ListPresence extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        $validator = Validator::make($request->all(), [
-            'offset' => 'required'
-        ]);
-        if (!$validator->passes()) {
-            return GlobalHelper::createResponse(false, 'Offset harus di isi!');
-        }
         $user = FacadesJWTAuth::parseToken()->authenticate();
-        $list = Presensi::where('user_id', $user->id)->limit(5)->offset($request->offset)->orderBy('created_at', 'DESC')->get();
+        $list = Presensi::where('user_id', $user->id)
+                            ->orderBy('created_at', 'DESC')
+                            ->simplePaginate(5);
         return GlobalHelper::createResponse(true, 'Data ditemukan', $list);
     }
+
+    // public function __invoke(Request $request) // Offset Version
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'offset' => 'required'
+    //     ]);
+    //     if (!$validator->passes()) {
+    //         return GlobalHelper::createResponse(false, 'Offset harus di isi!');
+    //     }
+    //     $user = FacadesJWTAuth::parseToken()->authenticate();
+    //     $list = Presensi::where('user_id', $user->id)->limit(5)->offset($request->offset)->orderBy('created_at', 'DESC')->get();
+    //     return GlobalHelper::createResponse(true, 'Data ditemukan', $list);
+    // }
+    
 }
