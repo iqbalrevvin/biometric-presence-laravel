@@ -42,6 +42,8 @@ class HitPresenceController extends Controller
                 $presensi = new Presensi;
                 $presensi->user_id = $karyawan->user_id;
                 $presensi->tipe = $request->tipe;
+                $presensi->latitude = $request->latitude;
+                $presensi->longitude = $request->longitude;
                 $presensi->tanggal = date('Y-m-d');
                 $presensi->save();
                 if ($presensi->save()) {
