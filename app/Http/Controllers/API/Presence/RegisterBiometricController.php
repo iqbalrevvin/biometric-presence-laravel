@@ -29,7 +29,11 @@ class RegisterBiometricController extends Controller
         $karyawan = Karyawan::where('user_id', $user->id);
         if($karyawan){
             if (!$karyawan->first()->biometric_id) {
-                $karyawan->update(['biometric_id' => $request->biometric_id]);
+                $karyawan->update([
+                    'biometric_id' => $request->biometric_id,
+                    'device_id' => $request->device_id,
+                    'device_name' => $request->device_name
+                ]);
                 return GlobalHelper::createResponse(true, 'ID Biometrik Perangkat dengan akun ini berhasil di daftarkan ke server, perangkat ini hanya bisa digunakan untuk presensi dengan akun ' . $karyawan->first()->email);
             } else {
                 return GlobalHelper::createResponse(false, 'Akun yang anda loginkan sudah terdaftar di perangkat lain!');
