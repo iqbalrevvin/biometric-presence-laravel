@@ -108,8 +108,17 @@ class KaryawanCrudController extends CrudController
         CRUD::setFromDb(); // fields
         $this->crud->removeField('user_id');
         $this->crud->removeField('biometric_id');
+        $this->crud->removeField('device_id');
+        $this->crud->removeField('device_name');
         $this->crud->field('nik')->type('number');
         $this->crud->field('nip')->type('number');
+        $this->crud->modifyField('jenis_kelamin', [
+            'type'        => 'select_from_array',
+            'label' => 'Jenis Kelamin',
+            'options' => ['Laki-laki' => 'Laki-laki', 'Perempuan' => 'Perempuan'],
+            'allows_null' => false,
+            'default'     => 'Laki-laki',
+        ]);
         $this->crud->modifyField('divisi_id', [
             'type' => 'select2',
             'entity' => 'divisi', // the relationship name in your Model
@@ -148,7 +157,7 @@ class KaryawanCrudController extends CrudController
         if($this->crud->getRequest()){
             $this->crud->setRequest($this->crud->validateRequest()); 
             $this->crud->unsetValidation();
-            \Alert::add('info', 'Karyawan & Akun pengguna berhasil dibuat! (Password default adalah : password)')->flash();
+            \Alert::add('info', 'Karyawan & Akun pengguna berhasil dibuat! (Password default adalah : P@ssw0rd)')->flash();
             return $this->traitStore();
         }else{
             return false;

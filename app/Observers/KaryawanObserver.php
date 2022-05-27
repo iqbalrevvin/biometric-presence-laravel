@@ -14,7 +14,7 @@ class KaryawanObserver
         $user = new User;
         $user->name = $karyawan->nama_lengkap;
         $user->email = $karyawan->email;
-        $user->password = Hash::make('password');
+        $user->password = Hash::make('P@ssw0rd');
         $user->save();
         $user->assignRole('Karyawan');
 
